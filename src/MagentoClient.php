@@ -1,0 +1,80 @@
+<?php
+
+/*
+ * This file is part of eoko\magento2.
+ *
+ * PHP Version 7.1
+ *
+ * @author    Romain DARY <romain.dary@eoko.fr>
+ * @copyright 2011-2018 Eoko. All rights reserved.
+ * @project   Synczila
+ */
+
+namespace Eoko\Magento2\Client;
+
+use Eoko\Magento2\Client\Api\AdminTokenApiInterface;
+use Eoko\Magento2\Client\Api\ProductApiInterface;
+use Eoko\Magento2\Client\Security\Authentication;
+use Eoko\Magento2\Client\Security\AuthenticationInterface;
+
+/**
+ * This class is the implementation of the client to use the Magento API.
+ */
+class MagentoClient implements MagentoClientInterface
+{
+    /** @var Authentication */
+    protected $authentication;
+
+    /** @var ProductApiInterface */
+    protected $productApi;
+
+    /** @var AdminTokenApiInterface */
+    private $adminTokenApi;
+
+    /**
+     * @param AuthenticationInterface|null $authentication
+     * @param AdminTokenApiInterface       $adminTokenApi
+     * @param ProductApiInterface          $productApi
+     */
+    public function __construct(
+        AuthenticationInterface $authentication = null,
+        AdminTokenApiInterface $adminTokenApi,
+        ProductApiInterface $productApi
+    ) {
+        $this->authentication = $authentication;
+        $this->adminTokenApi = $adminTokenApi;
+        $this->productApi = $productApi;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getToken()
+    {
+        return $this->authentication->getAccessToken();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRefreshToken()
+    {
+        return $this->authentication->getRefreshToken();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductApi()
+    {
+        return $this->productApi;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAdminTokenApi(): AdminTokenApiInterface
+    {
+        return $this->adminTokenApi;
+    }
+}

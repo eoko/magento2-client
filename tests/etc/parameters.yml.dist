@@ -1,0 +1,5 @@
+magento2:
+    base_uri: 'http://m2.localhost:8000/rest/default'
+    admin_token: 'jj2f0da74or630r74x7l3igcwn5tpqs3'
+    admin_user: 'magento2'
+    admin_password: 'magento2'
