@@ -15,7 +15,7 @@ services:
   - docker
 
 before_install:
-- docker volume rm `docker volume ls -q -f dangling=true`
+- docker volume ls -q -f dangling=true
 - docker-compose up -d --force-recreate
 - docker-compose run --rm setup
 - composer install
