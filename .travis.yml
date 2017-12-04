@@ -23,4 +23,5 @@ before_install:
 - composer install
 
 script:
+- netstat -tulpn
 - composer test
