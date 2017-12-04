@@ -9,18 +9,27 @@ services:
     links:
       - db
       - phpfpm
+    volumes: &appvolumes
+      - appdata:/var/www/html
     ports:
       - 8000:80
+    networks: &appnetworks
+      - www
 
   phpfpm:
     image: markoshust/magento2-php:7.1-fpm-0
     links:
       - db
+    volumes: *appvolumes
+    networks: *appnetworks
 
   db:
     image: percona:5.7
+    volumes:
+      - dbdata:/var/lib/mysql
     ports:
       - 8001:3306
+    networks: *appnetworks
     env_file: docker/env/mysql.env
 
   setup:
@@ -28,4 +37,13 @@ services:
     command: /usr/local/bin/mage-setup
     links:
       - db
+    volumes: *appvolumes
+    networks: *appnetworks
     env_file: docker/env/setup.env
+
+volumes:
+  dbdata:
+  appdata:
+
+networks:
+  www:

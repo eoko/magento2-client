@@ -97,7 +97,6 @@ abstract class AbstractApiTestCase extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($expectedContent, $actualContent);
     }
-
     /**
      * @return string
      */
