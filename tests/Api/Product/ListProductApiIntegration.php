@@ -47,29 +47,24 @@ class ListProductApiIntegration extends AbstractProductApiTestCase
         $secondPageProducts = $this->sanitizeProducts($secondPage->getItems());
         $secondPageExpectedProducts = array_slice($expectedProducts, 25, 25);
 
-        for ($i = 0; $i < 25; ++$i) {
-            $this->assertSameContent($secondPageExpectedProducts[$i], $secondPageProducts[$i]);
-        }
-//        var_dump(count($secondPageExpectedProducts), count($secondPageProducts));die;
-//
-//        $this->assertSameContent($secondPageExpectedProducts, $secondPageProducts);
-//
-//        $nextPAge = $secondPage->getNextPage();
-//        $this->assertInstanceOf(PageInterface::class, $nextPAge);
-//
-//        $lastPage = $secondPage->getLastPage();
-//        $this->assertInstanceOf(PageInterface::class, $lastPage);
-//        $this->assertTrue($lastPage->hasPreviousPage());
-//        $this->assertFalse($lastPage->hasNextPage());
-//        $this->assertNull($lastPage->getNextPage());
-//        $this->assertNull($lastPage->getNextLink());
-//        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=81', $lastPage->getPreviousLink());
-//
-//        $products = $lastPage->getItems();
-//        $this->assertCount(21, $products);
-//
-//        $previousPage = $lastPage->getPreviousPage();
-//        $this->assertInstanceOf(PageInterface::class, $previousPage);
+        $this->assertSameContent($secondPageExpectedProducts, $secondPageProducts);
+
+        $nextPAge = $secondPage->getNextPage();
+        $this->assertInstanceOf(PageInterface::class, $nextPAge);
+
+        $lastPage = $secondPage->getLastPage();
+        $this->assertInstanceOf(PageInterface::class, $lastPage);
+        $this->assertTrue($lastPage->hasPreviousPage());
+        $this->assertFalse($lastPage->hasNextPage());
+        $this->assertNull($lastPage->getNextPage());
+        $this->assertNull($lastPage->getNextLink());
+        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=81', $lastPage->getPreviousLink());
+
+        $products = $lastPage->getItems();
+        $this->assertCount(21, $products);
+
+        $previousPage = $lastPage->getPreviousPage();
+        $this->assertInstanceOf(PageInterface::class, $previousPage);
     }
 
     public function testListPerPageWithSpecificQueryParameter()
