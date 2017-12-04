@@ -7,7 +7,6 @@
  *
  * @author    Romain DARY <romain.dary@eoko.fr>
  * @copyright 2011-2018 Eoko. All rights reserved.
- * @project   Synczila
  */
 
 namespace Eoko\Magento2\Client\tests\Api\Product;
@@ -30,7 +29,7 @@ class ListProductApiIntegration extends AbstractProductApiTestCase
         $this->assertNull($firstPage->getPreviousPage());
         $this->assertFalse($firstPage->hasPreviousPage());
         $this->assertTrue($firstPage->hasNextPage());
-        $this->assertSame($baseUri . '/V1/products?searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=2', $firstPage->getNextLink());
+        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=2', $firstPage->getNextLink());
 
         $firstPageProducts = $this->sanitizeProducts($firstPage->getItems());
         $firstPageExpectedProducts = array_slice($expectedProducts, 0, 25);
@@ -42,16 +41,15 @@ class ListProductApiIntegration extends AbstractProductApiTestCase
         $this->assertInstanceOf(PageInterface::class, $secondPage);
         $this->assertTrue($secondPage->hasPreviousPage());
         $this->assertTrue($secondPage->hasNextPage());
-        $this->assertSame($baseUri . '/V1/products?searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=1', $secondPage->getPreviousLink());
-        $this->assertSame($baseUri . '/V1/products?searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=3', $secondPage->getNextLink());
+        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=1', $secondPage->getPreviousLink());
+        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=3', $secondPage->getNextLink());
 
         $secondPageProducts = $this->sanitizeProducts($secondPage->getItems());
         $secondPageExpectedProducts = array_slice($expectedProducts, 25, 25);
 
-        for ($i = 0; $i < 25; $i++) {
-
-        $this->assertSameContent($secondPageExpectedProducts[$i], $secondPageProducts[$i]);
-    }
+        for ($i = 0; $i < 25; ++$i) {
+            $this->assertSameContent($secondPageExpectedProducts[$i], $secondPageProducts[$i]);
+        }
 //        var_dump(count($secondPageExpectedProducts), count($secondPageProducts));die;
 //
 //        $this->assertSameContent($secondPageExpectedProducts, $secondPageProducts);
@@ -87,7 +85,7 @@ class ListProductApiIntegration extends AbstractProductApiTestCase
         $this->assertNull($firstPage->getPreviousPage());
         $this->assertFalse($firstPage->hasPreviousPage());
         $this->assertTrue($firstPage->hasNextPage());
-        $this->assertSame($baseUri . '/V1/products?foo=bar&searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=2', $firstPage->getNextLink());
+        $this->assertSame($baseUri.'/V1/products?foo=bar&searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=2', $firstPage->getNextLink());
 
         $firstPageProducts = $this->sanitizeProducts($firstPage->getItems());
         $firstPageExpectedProducts = array_slice($expectedProducts, 0, 25);

@@ -7,7 +7,6 @@
  *
  * @author    Romain DARY <romain.dary@eoko.fr>
  * @copyright 2011-2018 Eoko. All rights reserved.
- * @project   Synczila
  */
 
 namespace Eoko\Magento2\Client\Api\Operation;

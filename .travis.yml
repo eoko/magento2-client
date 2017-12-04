@@ -20,4 +20,5 @@ before_install:
 - composer install
 
 script:
+- composer cs-ci
 - composer test

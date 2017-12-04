@@ -7,7 +7,6 @@ PHP Version 7.1
 
 @author    Romain DARY <romain.dary@eoko.fr>
 @copyright 2011-2018 Eoko. All rights reserved.
-@project   Synczila
 EOF;
 $config = new Config();
 $config->getFinder()
