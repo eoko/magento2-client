@@ -4,8 +4,12 @@
 
 ## Scope
 
-Please, read `tests` to see which method is tested and ready to use. All PR is welcomed :D!
+Please, read `/tests` to see which method is tested and ready to use. All PR is welcomed :D!
 
 ## Usage
 
-Have a look to `examples` folder.
+Have a look to `/examples` folder.
+
+## Authentication
+
+Right now, the only authentication process available with this client is trough an admin token.
