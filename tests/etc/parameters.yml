@@ -1,4 +1,4 @@
 magento2:
-    base_uri: 'http://m2.localhost:8000/rest/default'
+    base_uri: 'http://localhost:8000/rest/default'
     admin_user: 'magento2'
     admin_password: 'magento2'

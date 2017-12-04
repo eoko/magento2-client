@@ -3,6 +3,7 @@
 
 version: "3"
 
+
 services:
   app:
     image: markoshust/magento2-nginx:1.13-0

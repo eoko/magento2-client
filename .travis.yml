@@ -4,6 +4,7 @@ sudo: required
 cache:
   directories:
     - $HOME/.composer/cache/files
+    - $HOME/.cache/docker
 
 matrix:
   fast_finish: true
@@ -14,6 +15,9 @@ services:
   - docker
 
 before_install:
+- docker pull markoshust/magento2-nginx:1.13-0
+- docker pull markoshust/magento2-php:7.1-fpm-0
+- docker pull percona:5.7
 - docker-compose up -d
 - docker-compose run --rm setup
 - composer install
