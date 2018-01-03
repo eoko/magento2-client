@@ -19,4 +19,10 @@ use Eoko\Magento2\Client\Api\Operation\UpdateblaInterface;
 
 interface ProductApiInterface extends ListableResourceInterface, GettableResourceInterface, CreatableResourceInterface, UpdateblaInterface, DeletableResourceInterface
 {
+    /**
+     * @param string $productSku
+     *
+     * @return StockItemApiInterface
+     */
+    public function getStockItemApi(string $productSku): StockItemApiInterface;
 }

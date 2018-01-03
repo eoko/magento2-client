@@ -47,6 +47,11 @@ class ProductApi implements ProductApiInterface
         $this->cursorFactory = $cursorFactory;
     }
 
+    public function getStockItemApi(string $productSku): StockItemApiInterface
+    {
+        return new StockItemApi($this->resourceClient, $productSku);
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -11,8 +11,6 @@
 
 namespace Eoko\Magento2\Client\Api\Operation;
 
-use Eoko\Magento2\Client\Exception\HttpException;
-
 /**
  * API that can "Update" a resource.
  */
@@ -24,9 +22,7 @@ interface UpdateblaInterface
      * @param string $code code of the resource to create or update
      * @param array  $data data of the resource to create or update
      *
-     * @throws HttpException if the request failed
-     *
-     * @return array
+     * @return array if the request failed
      */
     public function update($code, array $data = []): array;
 }

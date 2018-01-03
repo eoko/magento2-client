@@ -90,6 +90,7 @@ class ResourceClient implements ResourceClientInterface
         unset($body['_links']);
 
         $uri = $this->uriGenerator->generate($uri, $uriParameters);
+
         $response = $this->httpClient->sendRequest(
             'PUT',
             $uri,
