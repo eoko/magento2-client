@@ -118,6 +118,16 @@ foreach ($products as $product) {
 $client->getProductApi()->update('top', ['family' => 'tshirt']);
 ```
 
+## Stock Item
+
+### Update a stock item
+
+```
+$api = $client->getProductApi()->getStockItemApi('MH03-M-Blue');
+
+// There is nothing interesting in the output (product id :/)
+$api->update($item['item_id'], ['qty' => 42]);
+```
 ## Support
 
 If you find a bug or want to submit an improvement, don't hesitate to raise an issue on Github.
