@@ -12,6 +12,7 @@
 namespace Eoko\Magento2\Client;
 
 use Eoko\Magento2\Client\Api\AdminTokenApiInterface;
+use Eoko\Magento2\Client\Api\OrderApiInterface;
 use Eoko\Magento2\Client\Api\ProductApiInterface;
 use Eoko\Magento2\Client\Security\Authentication;
 use Eoko\Magento2\Client\Security\AuthenticationInterface;
@@ -27,22 +28,28 @@ class MagentoClient implements MagentoClientInterface
     /** @var ProductApiInterface */
     protected $productApi;
 
+    /** @var OrderApiInterface */
+    protected $orderApi;
+
     /** @var AdminTokenApiInterface */
     private $adminTokenApi;
 
     /**
      * @param AuthenticationInterface|null $authentication
-     * @param AdminTokenApiInterface       $adminTokenApi
-     * @param ProductApiInterface          $productApi
+     * @param AdminTokenApiInterface $adminTokenApi
+     * @param ProductApiInterface $productApi
+     * @param OrderApiInterface $orderApi
      */
     public function __construct(
         AuthenticationInterface $authentication = null,
         AdminTokenApiInterface $adminTokenApi,
-        ProductApiInterface $productApi
+        ProductApiInterface $productApi,
+        OrderApiInterface $orderApi
     ) {
         $this->authentication = $authentication;
         $this->adminTokenApi = $adminTokenApi;
         $this->productApi = $productApi;
+        $this->orderApi = $productApi;
     }
 
     /**
