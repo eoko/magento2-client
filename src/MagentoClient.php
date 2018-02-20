@@ -50,7 +50,7 @@ class MagentoClient implements MagentoClientInterface
         $this->authentication = $authentication;
         $this->adminTokenApi = $adminTokenApi;
         $this->productApi = $productApi;
-        $this->orderApi = $productApi;
+        $this->orderApi = $orderApi;
     }
 
     /**
