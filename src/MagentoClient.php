@@ -45,7 +45,8 @@ class MagentoClient implements MagentoClientInterface
         AdminTokenApiInterface $adminTokenApi,
         ProductApiInterface $productApi,
         OrderApiInterface $orderApi
-    ) {
+    )
+    {
         $this->authentication = $authentication;
         $this->adminTokenApi = $adminTokenApi;
         $this->productApi = $productApi;
@@ -71,9 +72,17 @@ class MagentoClient implements MagentoClientInterface
     /**
      * {@inheritdoc}
      */
-    public function getProductApi()
+    public function getProductApi(): ProductApiInterface
     {
         return $this->productApi;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrderApi(): OrderApiInterface
+    {
+        return $this->orderApi;
     }
 
     /**
