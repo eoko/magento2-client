@@ -20,6 +20,7 @@ use Eoko\Magento2\Client\Search\SearchCriteria;
 
 class OrderApi implements OrderApiInterface
 {
+    const ORDERS_URI = 'V1/orders';
     const ORDER_URI = 'V1/orders/%s';
 
     /** @var ResourceClientInterface */
@@ -57,7 +58,7 @@ class OrderApi implements OrderApiInterface
 
         $queryParameters['searchCriteria'] = $searchCriteria->toArray();
 
-        $data = $this->resourceClient->getResources(static::ORDER_URI, [], $queryParameters);
+        $data = $this->resourceClient->getResources(static::ORDERS_URI, [], $queryParameters);
 
         return $this->pageFactory->createPage($data);
     }
