@@ -36,17 +36,16 @@ class MagentoClient implements MagentoClientInterface
 
     /**
      * @param AuthenticationInterface|null $authentication
-     * @param AdminTokenApiInterface $adminTokenApi
-     * @param ProductApiInterface $productApi
-     * @param OrderApiInterface $orderApi
+     * @param AdminTokenApiInterface       $adminTokenApi
+     * @param ProductApiInterface          $productApi
+     * @param OrderApiInterface            $orderApi
      */
     public function __construct(
         AuthenticationInterface $authentication = null,
         AdminTokenApiInterface $adminTokenApi,
         ProductApiInterface $productApi,
         OrderApiInterface $orderApi
-    )
-    {
+    ) {
         $this->authentication = $authentication;
         $this->adminTokenApi = $adminTokenApi;
         $this->productApi = $productApi;

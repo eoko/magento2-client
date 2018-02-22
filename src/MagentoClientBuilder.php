@@ -127,7 +127,7 @@ class MagentoClientBuilder
             $authentication,
             new AdminTokenApi($resourceClient),
             new ProductApi($resourceClient, $pageFactory, $cursorFactory),
-            new OrderApi($resourceClient)
+            new OrderApi($resourceClient, $pageFactory, $cursorFactory)
         );
 
         return $client;

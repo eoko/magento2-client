@@ -22,6 +22,9 @@ class SearchCriteria
     /** @var int */
     protected $currentPage = 1;
 
+    /** @var SearchGroup[] */
+    protected $searchGroups = [];
+
     /**
      * @param int $pageSize
      */
@@ -38,11 +41,45 @@ class SearchCriteria
         $this->currentPage = $currentPage;
     }
 
+    /**
+     * @return SearchGroup[]
+     */
+    public function getSearchGroups(): array
+    {
+        return $this->searchGroups;
+    }
+
+    /**
+     * @param SearchGroup[] $searchGroups
+     */
+    public function setSearchGroups(array $searchGroups)
+    {
+        $this->searchGroups = $searchGroups;
+    }
+
+    /**
+     * @param SearchGroup $searchGroup
+     */
+    public function addSearchGroup(SearchGroup $searchGroup)
+    {
+        $this->searchGroups[] = $searchGroup;
+    }
+
+    /**
+     * @return array
+     */
     public function toArray()
     {
-        return [
+        $array = [
             'pageSize' => $this->pageSize,
             'currentPage' => $this->currentPage,
+            'filter_groups' => [],
         ];
+
+        foreach ($this->searchGroups as $searchGroup) {
+            $array['filter_group'][] = $searchGroup->toArray();
+        }
+
+        return $array;
     }
 }

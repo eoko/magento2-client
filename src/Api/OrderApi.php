@@ -12,11 +12,11 @@
 namespace Eoko\Magento2\Client\Api;
 
 use Eoko\Magento2\Client\Client\ResourceClientInterface;
-use Eoko\Magento2\Client\Exception\InvalidArgumentException;
 use Eoko\Magento2\Client\Pagination\PageFactoryInterface;
 use Eoko\Magento2\Client\Pagination\PageInterface;
 use Eoko\Magento2\Client\Pagination\ResourceCursorFactoryInterface;
 use Eoko\Magento2\Client\Pagination\ResourceCursorInterface;
+use Eoko\Magento2\Client\Search\SearchCriteria;
 
 class OrderApi implements OrderApiInterface
 {
@@ -25,13 +25,51 @@ class OrderApi implements OrderApiInterface
     /** @var ResourceClientInterface */
     protected $resourceClient;
 
+    /** @var PageFactoryInterface */
+    protected $pageFactory;
+
+    /** @var ResourceCursorFactoryInterface */
+    protected $cursorFactory;
+
     /**
      * @param ResourceClientInterface        $resourceClient
+     * @param PageFactoryInterface           $pageFactory
+     * @param ResourceCursorFactoryInterface $cursorFactory
      */
     public function __construct(
-        ResourceClientInterface $resourceClient
+        ResourceClientInterface $resourceClient,
+        PageFactoryInterface $pageFactory,
+        ResourceCursorFactoryInterface $cursorFactory
     ) {
         $this->resourceClient = $resourceClient;
+        $this->pageFactory = $pageFactory;
+        $this->cursorFactory = $cursorFactory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function listPerPage(SearchCriteria $searchCriteria = null): PageInterface
+    {
+        if (null === $searchCriteria) {
+            $searchCriteria = new SearchCriteria();
+        }
+
+        $queryParameters['searchCriteria'] = $searchCriteria->toArray();
+
+        $data = $this->resourceClient->getResources(static::ORDER_URI, [], $queryParameters);
+
+        return $this->pageFactory->createPage($data);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function all($limit = 100, array $queryParameters = []): ResourceCursorInterface
+    {
+        $firstPage = $this->listPerPage($queryParameters);
+
+        return $this->cursorFactory->createCursor($limit, $firstPage);
     }
 
     /**
