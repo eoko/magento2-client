@@ -49,7 +49,7 @@ class OrderApi implements OrderApiInterface
     /**
      * {@inheritdoc}
      */
-    public function listPerPage(SearchCriteria $searchCriteria = null): PageInterface
+    public function listPerPage(?SearchCriteria $searchCriteria): PageInterface
     {
         if (null === $searchCriteria) {
             $searchCriteria = new SearchCriteria();
@@ -65,9 +65,9 @@ class OrderApi implements OrderApiInterface
     /**
      * {@inheritdoc}
      */
-    public function all($limit = 100, array $queryParameters = []): ResourceCursorInterface
+    public function all($limit = 100, ?SearchCriteria $searchCriteria): ResourceCursorInterface
     {
-        $firstPage = $this->listPerPage($queryParameters);
+        $firstPage = $this->listPerPage($searchCriteria);
 
         return $this->cursorFactory->createCursor($limit, $firstPage);
     }

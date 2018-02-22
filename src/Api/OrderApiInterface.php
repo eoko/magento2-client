@@ -12,7 +12,8 @@
 namespace Eoko\Magento2\Client\Api;
 
 use Eoko\Magento2\Client\Api\Operation\GettableResourceInterface;
+use Eoko\Magento2\Client\Api\Operation\ListableResourceInterface;
 
-interface OrderApiInterface extends GettableResourceInterface
+interface OrderApiInterface extends GettableResourceInterface, ListableResourceInterface
 {
 }

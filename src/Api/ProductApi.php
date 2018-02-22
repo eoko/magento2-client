@@ -17,6 +17,7 @@ use Eoko\Magento2\Client\Pagination\PageFactoryInterface;
 use Eoko\Magento2\Client\Pagination\PageInterface;
 use Eoko\Magento2\Client\Pagination\ResourceCursorFactoryInterface;
 use Eoko\Magento2\Client\Pagination\ResourceCursorInterface;
+use Eoko\Magento2\Client\Search\SearchCriteria;
 
 class ProductApi implements ProductApiInterface
 {
@@ -63,20 +64,13 @@ class ProductApi implements ProductApiInterface
     /**
      * {@inheritdoc}
      */
-    public function listPerPage(array $queryParameters = []): PageInterface
+    public function listPerPage(?SearchCriteria $searchCriteria): PageInterface
     {
-        $queryParameters['searchCriteria'] = isset($queryParameters['searchCriteria']) && is_array($queryParameters['searchCriteria']) ? $queryParameters['searchCriteria'] : [];
-
-        if (array_key_exists('pageSize', $queryParameters['searchCriteria'])) {
-            throw new InvalidArgumentException('The parameter "searchCriteria[\'pageSize\']" should not be defined in the additional query parameters');
+        if (null === $searchCriteria) {
+            $searchCriteria = new SearchCriteria();
         }
 
-        if (array_key_exists('currentPage', $queryParameters['searchCriteria'])) {
-            throw new InvalidArgumentException('The parameter "searchCriteria[\'currentPage\']" should not be defined in the additional query parameters');
-        }
-
-        $queryParameters['searchCriteria']['pageSize'] = 25;
-        $queryParameters['searchCriteria']['currentPage'] = 1;
+        $queryParameters['searchCriteria'] = $searchCriteria->toArray();
 
         $data = $this->resourceClient->getResources(static::PRODUCTS_URI, [], $queryParameters);
 
@@ -86,9 +80,9 @@ class ProductApi implements ProductApiInterface
     /**
      * {@inheritdoc}
      */
-    public function all($limit = 100, array $queryParameters = []): ResourceCursorInterface
+    public function all($limit = 100, ?SearchCriteria $searchCriteria): ResourceCursorInterface
     {
-        $firstPage = $this->listPerPage($queryParameters);
+        $firstPage = $this->listPerPage($searchCriteria);
 
         return $this->cursorFactory->createCursor($limit, $firstPage);
     }
