@@ -77,7 +77,7 @@ class SearchCriteria
         ];
 
         foreach ($this->searchGroups as $searchGroup) {
-            $array['filter_group'][] = $searchGroup->toArray();
+            $array['filter_groups'][] = $searchGroup->toArray();
         }
 
         return $array;

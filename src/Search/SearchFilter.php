@@ -13,7 +13,7 @@ namespace Eoko\Magento2\Client\Search;
 
 use Eoko\Magento2\Client\Exception\NotAValidOperator;
 
-class SearchItem
+class SearchFilter
 {
     const EQ = 'eq';
     const FINSET = 'finset';

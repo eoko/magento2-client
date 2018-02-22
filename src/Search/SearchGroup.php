@@ -13,39 +13,41 @@ namespace Eoko\Magento2\Client\Search;
 
 class SearchGroup
 {
-    /** @var SearchItem[] */
-    protected $items = [];
+    /** @var SearchFilter[] */
+    protected $filters = [];
 
     /**
-     * @return SearchItem[]
+     * @return SearchFilter[]
      */
-    public function getItems(): array
+    public function getFilters(): array
     {
-        return $this->items;
+        return $this->filters;
     }
 
     /**
-     * @param SearchItem[] $items
+     * @param SearchFilter[] $filters
      */
-    public function setItems(array $items)
+    public function setFilters(array $filters)
     {
-        $this->items = $items;
+        $this->filters = $filters;
     }
 
     /**
-     * @param SearchItem $item
+     * @param SearchFilter $filter
      */
-    public function addItem(SearchItem $item)
+    public function addFilter(SearchFilter $filter)
     {
-        $this->items[] = $item;
+        $this->filters[] = $filter;
     }
 
     public function toArray()
     {
-        $array = [];
+        $array = [
+            'filters' => [],
+        ];
 
-        foreach ($this->items as $item) {
-            $array[] = $item->toArray();
+        foreach ($this->filters as $filter) {
+            $array['filters'][] = $filter->toArray();
         }
 
         return $array;
