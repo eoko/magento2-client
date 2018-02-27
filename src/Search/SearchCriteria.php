@@ -66,6 +66,22 @@ class SearchCriteria
     }
 
     /**
+     * @return int
+     */
+    public function getPageSize(): int
+    {
+        return $this->pageSize;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCurrentPage(): int
+    {
+        return $this->currentPage;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
